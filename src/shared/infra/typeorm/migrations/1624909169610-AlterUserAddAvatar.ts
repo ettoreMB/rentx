@@ -1,5 +1,5 @@
 import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
-import { UpdateUserAvatarController } from "../../modules/accounts/UseCases/UpdateUserAvatar/UpdateUserAvatarUseController";
+import { UpdateUserAvatarController } from "../../../../modules/accounts/UseCases/UpdateUserAvatar/UpdateUserAvatarUseController";
 
 export class AlterUserAddAvatar1624909169610 implements MigrationInterface {
 

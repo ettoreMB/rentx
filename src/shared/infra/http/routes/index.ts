@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { categoriesRoutes } from '../routes/categories.routes';
-import { specificationsRoutes } from '../routes/specificaions.routes';
+import { categoriesRoutes } from './categories.routes';
+import { specificationsRoutes } from './specificaions.routes';
 import { authenticateRoutes } from "./authenticate.routes";
 import { usersRoutes } from "./users.routes";
 
