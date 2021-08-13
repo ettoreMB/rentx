@@ -1,6 +1,5 @@
 import { Category } from "../infra/typeorm/entities/Category";
 
-//DTO - DATA TRNANFER OBJECT
 
 interface ICreateCategoryDTO {
   name: string;

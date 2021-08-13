@@ -13,13 +13,12 @@ export async function ensureAuthenticate (req: Request, res: Response, next:Next
 
   if(!authHeader) {
     throw new AppError("Token is missing!", 401);
-    
   }
 
-  const [, token] = authHeader.split(" ");
+  const [token] = authHeader.split(" ");
 
   try {
-    const { sub: user_id } = verify(token, "c6f19e983b29b0c06eeecfb18382493a") as IPayload;
+    const { sub: user_id } = verify(token, "6ede2e6e-1e7c-4b9e-8c36-36e9ad4b8a35") as IPayload;
 
     const usersRepository = new UsersRepository();
 

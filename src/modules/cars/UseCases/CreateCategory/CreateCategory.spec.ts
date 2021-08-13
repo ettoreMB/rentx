@@ -1,9 +1,6 @@
+import { CategoriresRepositoryInMemory } from '@modules/cars/repositories/in-memory/InMemoryCategoriesRepository';
 import { AppError } from '../../../../shared/errors/AppErrors';   
-import { Category } from '../../infra/typeorm/entities/Category';
-import { CategoriesRepository } from '../../infra/typeorm/repositories/implementations/CategoriesRepository';
-import { CategoriresRepositoryInMemory } from '../../repositories/in-memory/InMemoryCategoriesRepository';
 import { CreateCategoryUseCase } from './CreateCategoryUseCase';
-
 
  let createCategoryUseCase: CreateCategoryUseCase;
  let categoriresRepositoryInMemory: CategoriresRepositoryInMemory;
