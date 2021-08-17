@@ -3,7 +3,7 @@ import { ICreatecarDTO } from "../../dtos/ICreateCarDTO";
 import { ICarsRepository } from "../ICarsRepository";
 
 class CarsReposiotryInMemory  implements ICarsRepository {
-  
+ 
 
   cars: Car[]= [];
 
@@ -41,7 +41,7 @@ class CarsReposiotryInMemory  implements ICarsRepository {
     name?: string,
     ): Promise<Car[]> {
     const cars = this.cars.filter((car) => {
-      if (car.available === true && 
+      if (car.available === true ||    
           (brand && car.brand === brand) || 
           (name && car.name === name ) ||
           (category_id && car.category_id === category_id)
@@ -53,6 +53,11 @@ class CarsReposiotryInMemory  implements ICarsRepository {
       return cars;   
   }
   
+  async findById(id: string):Promise<Car> {
+    return this.cars.find((car) => car.id === id);
+  }
+  
+ 
 }
 
 export { CarsReposiotryInMemory }
