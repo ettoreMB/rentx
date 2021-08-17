@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction} from 'express';
 
 import 'express-async-errors';
 import 'reflect-metadata';
-import '@shared/infra/typeorm';
+import createConnection from '@shared/infra/typeorm';
 import '@shared/container';
 
 import swaggerUi from 'swagger-ui-express';
@@ -12,7 +12,7 @@ import { AppError } from '@shared/errors/AppErrors';
 import { router } from './routes';
 
 
-
+createConnection()
 const app  = express();
 app.use(express.json());
 
