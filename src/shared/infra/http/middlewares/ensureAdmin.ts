@@ -1,6 +1,7 @@
+import { NextFunction, Request, Response } from "express";
 import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "@shared/errors/AppErrors";
-import { NextFunction, Request, Response } from "express";
+
 
 export async function ensureaAdmin(req: Request, res: Response, next: NextFunction) {
   const { id } = req.user
@@ -13,5 +14,5 @@ export async function ensureaAdmin(req: Request, res: Response, next: NextFuncti
     throw new AppError('User is not Admin!')
   }
 
-  
+  next()
 }

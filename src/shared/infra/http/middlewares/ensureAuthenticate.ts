@@ -15,10 +15,10 @@ export async function ensureAuthenticate (req: Request, res: Response, next:Next
     throw new AppError("Token is missing!", 401);
   }
 
-  const [,  token] = authHeader.split(" ");
+  const [,  token] = authHeader.split(" ")
 
   try {
-    const { sub: user_id } = verify(token, "6ede2e6e-1e7c-4b9e-8c36-36e9ad4b8a35") as IPayload;
+    const { sub: user_id } = verify(token,"491ab746-ee6e-42d5-b97c-714086bd0ef3") as IPayload
 
     const usersRepository = new UsersRepository();
 
@@ -32,10 +32,11 @@ export async function ensureAuthenticate (req: Request, res: Response, next:Next
     req.user = {
       id: user_id
     }
-
+    
     next();
 
   } catch (error) {
+    
     throw new AppError("Inavalid Token", 401);
     
   }

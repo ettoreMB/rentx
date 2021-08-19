@@ -7,10 +7,10 @@ import { ensureAuthenticate } from "../middlewares/ensureAuthenticate";
 
 const specificationsRoutes =  Router();
 
-const createSpecificationController = new CreateSpecificationController()
+const createSpecificationController = new CreateSpecificationController();
 
 specificationsRoutes.use(ensureAuthenticate);
-specificationsRoutes.post('/' ,ensureAuthenticate, ensureaAdmin, createSpecificationController.handle);
+specificationsRoutes.post('/', createSpecificationController.handle);
 
 
 export { specificationsRoutes }

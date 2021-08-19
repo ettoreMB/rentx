@@ -1,15 +1,18 @@
 
 import { CarsReposiotryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
+import { SpecificationsRepostioryInMemory } from "@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppErrors";
 import { CreateCarSpecificationUseCase } from "./CreateCarSpecificationUseCase";
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
 let carsRepositoryInMemory: CarsReposiotryInMemory;
+let specificationsRepostioryInMemory: SpecificationsRepostioryInMemory
 
 describe('Create Car Specification', ()=> {
   beforeEach(() => {
     carsRepositoryInMemory = new CarsReposiotryInMemory();
-    createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory);
+    specificationsRepostioryInMemory = new SpecificationsRepostioryInMemory();
+    createCarSpecificationUseCase = new CreateCarSpecificationUseCase(carsRepositoryInMemory, specificationsRepostioryInMemory);
   })
 
   it('Should Be Able to add a new specification to car', async () => {
@@ -23,10 +26,17 @@ describe('Create Car Specification', ()=> {
       category_id: "category_id",
     })
 
-    const specifications_id = ['54321'];
-     await createCarSpecificationUseCase.execute({car_id: car.id, specifications_id});
-  })
+    const specification = await specificationsRepostioryInMemory.create({
+      description: 'test',
+      name: 'test'
+    })
 
+    const specifications_id = [specification.id];
+     const specificationsCars = await createCarSpecificationUseCase.execute({car_id: car.id, specifications_id});
+
+     expect(specificationsCars).toHaveProperty("specifications");
+     expect(specificationsCars.specifications.length).toBe(1);
+  })
   it('Should Not Be Able to add a new specification to a non existent car',  async () => {
     expect(async () => {
       const car_id = '1234';
@@ -34,4 +44,5 @@ describe('Create Car Specification', ()=> {
       await createCarSpecificationUseCase.execute({car_id, specifications_id});
     }).rejects.toBeInstanceOf(AppError);
   })
+  
 })
