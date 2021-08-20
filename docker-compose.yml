@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.2"
 
 services:
   database: 
@@ -13,12 +13,6 @@ services:
       - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres
-
-  
-  redis:
-    image: redis:alpine
-    ports: 
-      - 6379:6379
 
   app:
     build: .
