@@ -1,11 +1,9 @@
-import dayjs from 'dayjs' 
-import utc from 'dayjs/plugin/utc'
-
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
+import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppErrors";
 
-dayjs.extend(utc);
+
 
 interface IRequest {
   user_id: string;
@@ -15,6 +13,8 @@ interface IRequest {
 
 class CreateRentalUseCase {
   constructor(
+
+    private dateProvider: IDateProvider,
     private rentalsRepository: IRentalsRepository,
   ){}
   async execute({user_id, car_id, expected_return_date}:IRequest): Promise<Rental> {
@@ -34,9 +34,9 @@ class CreateRentalUseCase {
 
 
     //24h min rental
-    const expectDateFormat = dayjs(expected_return_date).utc().local().format();
-    const dateNow = dayjs().utc().local().format();
-    const compare = dayjs(expectDateFormat).diff(dateNow, ('hours'))
+    
+    const dateNow = this.dateProvider.dateNow()
+    const compare = this.dateProvider.compareInHours(expected_return_date, dateNow)
 
 
     if(compare < minRentalHours) {
