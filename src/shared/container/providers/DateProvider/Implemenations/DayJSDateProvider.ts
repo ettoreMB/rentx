@@ -21,3 +21,5 @@ class DayJSDateProvider  implements IDateProvider{
     return dayjs().toDate()
   }
 }
+
+export{DayJSDateProvider}
