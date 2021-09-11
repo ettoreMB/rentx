@@ -1,10 +1,15 @@
-import { ICreatecarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICreateRentalDTO } from "@modules/rentals/dtos/ICreateRentalDTO";
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 
 class RentalsRepositoryInMemory implements IRentalsRepository{
+  findById(id: string): Promise<Rental> {
+    throw new Error("Method not implemented.");
+  }
+  findByUser(user_id: string): Promise<Rental[]> {
+    throw new Error("Method not implemented.");
+  }
 
   
   rentals: Rental[] = [];
@@ -25,7 +30,7 @@ class RentalsRepositoryInMemory implements IRentalsRepository{
   }
 
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    return this.rentals.find((rental) => rental.card_id === car_id && !rental.end_date)
+    return this.rentals.find((rental) => rental.car_id === car_id && !rental.end_date)
   }
   async findOpenRentalByUser(user_id: string): Promise<Rental> {
     return this.rentals.find((rental) => rental.user_id === user_id && !rental.end_date)

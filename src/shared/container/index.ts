@@ -4,13 +4,16 @@ import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRep
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { ISpecificationRepository } from '@modules/cars/repositories/ISpecificationRepository';
 import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository';
+import { ICarsImagesReposiory } from '@modules/cars/repositories/ICarsImagesRepository';
+import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository';
 
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository';
 import { CarsRepository } from '@modules/cars/infra/typeorm/repositories/CarsRepository';
 import { SpecificationRepository } from '@modules/cars/infra/typeorm/repositories/SpecificationsRepository';
-import { ICarsImagesReposiory } from '@modules/cars/repositories/ICarsImagesRepository';
 import { CarsImagesRepository } from '@modules/cars/infra/typeorm/repositories/CarsImagesRepository';
+import { RentalsRepository } from '@modules/rentals/infra/typeorm/repositories/RentalsRespository';
+
 
 
 //ICategoriesRepository
@@ -44,9 +47,11 @@ container.registerSingleton<ICarsImagesReposiory>(
 )
 
 //IRentalsRepository
-// container.registerSingleton<IRentalsRepository>(
-//   "RentalsRepository",
-//   RentalsRepository
-// )
+container.registerSingleton<IRentalsRepository>(
+  "RentalsRepository",
+  RentalsRepository
+)
 
+//DateJsProvider
+  
 

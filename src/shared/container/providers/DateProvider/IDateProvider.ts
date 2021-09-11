@@ -1,7 +1,7 @@
 interface IDateProvider {
-  compareInHours(end_date: Date, start_date: Date): number;
+  dateNow():Date;
   convertToUTC(date: Date): string;
-  dateNow():Date
-
+  compareInHours(end_date: Date, start_date: Date): number;
+  compareInDays(start_date: Date, end_date: Date): number;
 }
 export {IDateProvider}

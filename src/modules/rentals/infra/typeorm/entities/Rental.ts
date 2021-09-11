@@ -7,7 +7,7 @@ class Rental {
   id: string;
 
   //@Column()
-  card_id: string;
+  car_id: string;
 
   //@Column()
   user_id: string;
