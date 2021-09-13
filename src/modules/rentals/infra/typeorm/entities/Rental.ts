@@ -1,30 +1,35 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Car } from '@modules/cars/infra/typeorm/entities/Car';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4} from 'uuid';
 
 // @Entity()
 class Rental {
-  //@PrimaryColumn()
+  @PrimaryColumn()
   id: string;
 
-  //@Column()
-  card_id: string;
+  @ManyToOne(() => Car)
+  @JoinColumn({name: "car_id"})
+  car: Car
 
-  //@Column()
+  @Column()
+  car_id: string;
+
+  @Column()
   user_id: string;
 
-  //@CreateDateColumn()
+  @Column()
   start_date: Date;
 
-  //@CreateDateColumn()
+  @Column()
   end_date: Date;
 
-  //@CreateDateColumn()
+  @Column()
   expected_return_date: Date;
 
-  //@Column()
+  @Column()
   total: number;
 
-  //@CreateDateColumn()
+  @CreateDateColumn()
   created_at: Date;
 
   constructor(){
