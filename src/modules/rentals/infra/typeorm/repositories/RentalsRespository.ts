@@ -24,10 +24,10 @@ class RentalsRepository implements IRentalsRepository {
     const rental =  this.repository.create({
       car_id,
       expected_return_date,
-    user_id,
-    id,
-    end_date,
-    total,
+      user_id,
+      id,
+      end_date,
+      total,
   })
   await this.repository.save(rental)
   
