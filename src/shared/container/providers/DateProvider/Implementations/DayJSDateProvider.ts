@@ -2,9 +2,10 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 
 import { IDateProvider } from "../IDateProvider";
-
 dayjs.extend(utc);
+
 class DayJSDateProvider  implements IDateProvider{
+
   dateNow(): Date {
     return dayjs().toDate()
   }
@@ -25,6 +26,10 @@ class DayJSDateProvider  implements IDateProvider{
     const end_date_utc = this.convertToUTC(end_date);
 
     return dayjs(end_date_utc).diff(start_date_utc, 'days');
+  }
+
+  addDays(days: number):Date {
+    return dayjs().add(days, "days").toDate();
   }
 }
 

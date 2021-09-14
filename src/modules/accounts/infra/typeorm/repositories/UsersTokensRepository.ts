@@ -3,17 +3,17 @@ import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTok
 import { getRepository, Repository } from "typeorm";
 import { UserTokens } from "../entities/UserTokens";
 
-class UserTokensRepository implements IUsersTokensRepository {
+class UsersTokensRepository implements IUsersTokensRepository {
   private repository: Repository<UserTokens>;
 
   constructor() {
     this.repository = getRepository(UserTokens);
   }
-  async create({ user_id, refresh_token, expires_date, }: ICreateUserTokenDTO): Promise<UserTokens> {
+  async create({ user_id, refresh_token, expires_in, }: ICreateUserTokenDTO): Promise<UserTokens> {
     const userToken = this.repository.create({
       user_id,
       refresh_token,
-      expires_date
+      expires_in
     })
 
     await this.repository.save(userToken);
@@ -23,4 +23,4 @@ class UserTokensRepository implements IUsersTokensRepository {
 
 }
 
-export {UserTokensRepository}
+export {UsersTokensRepository}
