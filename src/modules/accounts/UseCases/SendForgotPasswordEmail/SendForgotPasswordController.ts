@@ -8,7 +8,7 @@ class SendForgotPasswordController {
     const sendForgotPasswordUseCase = container.resolve(SendForgotPasswordUseCase)
 
     await sendForgotPasswordUseCase.execute(email)
-    return res.send('hi')
+    return res.send()
   }
 }
 
