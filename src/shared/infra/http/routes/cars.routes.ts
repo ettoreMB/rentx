@@ -11,7 +11,7 @@ import { ensureaAdmin } from '../middlewares/ensureAdmin';
 import { UploadCarImageController } from '@modules/cars/UseCases/UploadCarImages/UploadCarImagesController';
 
 
-const upload = multer(uploadConfig.upload("./tmp/cars"))
+const upload = multer(uploadConfig)
 
 const carsRoutes = Router()
 

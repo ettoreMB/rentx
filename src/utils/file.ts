@@ -2,13 +2,13 @@ import fs from 'fs'
 
 export const deleteFile = async(filename: string) => {
 
-  try {
-    await fs.promises.stat(filename);
+  // try {
+  //   await fs.promises.stat(filename);
 
 
-  } catch (error) {
-    return;
-  }
+  // } catch (error) {
+  //   return;
+  // }
 
-  await fs.promises.unlink(filename);
+  // await fs.promises.unlink(filename);
 };
