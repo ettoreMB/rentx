@@ -64,8 +64,8 @@ describe("Create Category Controller", () => {
       })
       .set({
         Authorization: `Bearer ${refresh_token}`,
-      });
-
+      }); 
+      
     expect(response.status).toBe(400);
   });
 });
