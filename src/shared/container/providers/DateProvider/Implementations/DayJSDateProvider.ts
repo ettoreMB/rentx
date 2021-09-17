@@ -6,6 +6,7 @@ dayjs.extend(utc);
 
 class DayJSDateProvider  implements IDateProvider{
   
+  
 
   dateNow(): Date {
     return dayjs().toDate()
@@ -27,6 +28,10 @@ class DayJSDateProvider  implements IDateProvider{
     const end_date_utc = this.convertToUTC(end_date);
 
     return dayjs(end_date_utc).diff(start_date_utc, 'days');
+  }
+
+  compareIfBefore(start_date: Date, end_date: Date): boolean {
+    return dayjs(start_date).isBefore(end_date);
   }
 
   addDays(days: number):Date {

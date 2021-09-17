@@ -1,20 +1,25 @@
 import { AppError } from "@shared/errors/AppErrors";
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDto";
-import { UsersRespositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersRepositoryInMemory";
+import { UsersRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersRepositoryInMemory";
 import { CreateUserUseCase } from "../CreateUser/CreateUserUseCase";
 
 
 import { AuthenticateUserCase } from "./authenticateUserUseCase"
+import { DayJSDateProvider } from "@shared/container/providers/DateProvider/Implementations/DayJSDateProvider";
+import { UsersTokensRepositoryInMemory } from "@modules/accounts/repositories/in-memory/UsersTokensRepositoryInMemory";
 
-let autheticateUserUseCase: AuthenticateUserCase;
-let usersRepositoryInMemory: UsersRespositoryInMemory;
-
+let dayJSDateProvider: DayJSDateProvider;
+let authenticateUserUseCase: AuthenticateUserCase;
+let usersRepositoryInMemory: UsersRepositoryInMemory;
+let usersTokenRepository: UsersTokensRepositoryInMemory;
 let createUserCase: CreateUserUseCase;
 
 describe('Authenticate User test', () => {
   beforeEach( () => {
-    usersRepositoryInMemory = new UsersRespositoryInMemory();
-    autheticateUserUseCase = new AuthenticateUserCase(usersRepositoryInMemory);
+    dayJSDateProvider = new DayJSDateProvider()
+    usersTokenRepository =  new UsersTokensRepositoryInMemory();
+    usersRepositoryInMemory = new UsersRepositoryInMemory();
+    authenticateUserUseCase = new AuthenticateUserCase(usersRepositoryInMemory, usersTokenRepository, dayJSDateProvider);
     createUserCase = new CreateUserUseCase(usersRepositoryInMemory);
   })
   it('Should Be Able to authenticate an User',async  () => {
@@ -27,7 +32,7 @@ describe('Authenticate User test', () => {
 
     await createUserCase.execute(user);
 
-    const result = await autheticateUserUseCase.execute({
+    const result = await authenticateUserUseCase.execute({
       email: user.email,
       password: user.password,
     });
@@ -37,7 +42,7 @@ describe('Authenticate User test', () => {
   it('Should not be able to authenticate an invalid User',async  () => {
 
     await expect(
-       autheticateUserUseCase.execute({
+       authenticateUserUseCase.execute({
         email: 'fake@email.com',
         password: '123',
       })
@@ -55,7 +60,7 @@ describe('Authenticate User test', () => {
     await createUserCase.execute(user);
 
     await expect( 
-        autheticateUserUseCase.execute({
+        authenticateUserUseCase.execute({
         email: user.email,
         password: 'Incorrect Password'
       })

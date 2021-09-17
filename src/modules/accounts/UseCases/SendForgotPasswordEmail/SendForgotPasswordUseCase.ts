@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-
+import {resolve} from 'path';
 import { v4 as uuidV4} from 'uuid'
 import { AppError } from "@shared/errors/AppErrors";
 
@@ -26,6 +26,8 @@ class SendForgotPasswordUseCase {
   async execute(email: string):Promise<void>{
     const user = await this.usersRepository.findByEmail(email);
 
+    const templatePath =  resolve(__dirname, "..", "..", "views", "emails", "forgotPassword.hbs")
+
     if(!user) {
       throw new AppError("User not Found!");
     }
@@ -39,7 +41,19 @@ class SendForgotPasswordUseCase {
       expires_in,
     });
 
-    await this.mailProvider.sendMail(email, "recuperação de senha", `O Link para reset ${token}`)
+    const variables = {
+      name: user.name,
+      link: `${process.env.FORGOT_EMAIL_URL}${token}`
+
+    }
+
+    await this.mailProvider.sendMail(
+      email,
+      "Recuperação de Senha",
+      variables,
+      templatePath
+    );
+
 
 
   }
