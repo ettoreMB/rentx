@@ -8,8 +8,8 @@ class Rental {
   id: string;
 
   @ManyToOne(() => Car)
-  @JoinColumn({name: "car_id"})
-  car: Car
+  @JoinColumn({ name: "car_id" })
+  car: Car;
 
   @Column()
   car_id: string;
