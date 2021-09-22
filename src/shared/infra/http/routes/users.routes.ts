@@ -21,7 +21,7 @@ const profileUserController = new ProfileUserController()
 
 usersRoutes.post("/", createUserController.handle);
 
-usersRoutes.get("/profile", profileUserController.handle)
+usersRoutes.get("/profile",ensureAuthenticate, profileUserController.handle)
 usersRoutes.patch(
   "/avatar",
   ensureAuthenticate,

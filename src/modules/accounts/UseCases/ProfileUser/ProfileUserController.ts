@@ -5,10 +5,11 @@ import { ProfileUserUseCase } from './ProfileUserUseCase';
 class ProfileUserController {
   async handle(req: Request, res: Response): Promise<Response> {
     const {id} = req.user;
-    const profileUseCase = container.resolve(ProfileUserUseCase);
-    const profile = profileUseCase.execute(id);
+   
+    const profileUserUseCase = container.resolve(ProfileUserUseCase);
+    const user = await profileUserUseCase.execute(id);
 
-    return res.json(profile)
+    return res.json(user)
   }
 }
 
