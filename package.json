@@ -13,7 +13,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/multer": "^1.4.5",
     "@types/swagger-ui-express": "^4.1.2",
-    "aws-sdk": "^2.992.0",
+    "aws-sdk": "^2.996.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "cross-env": "^7.0.3",

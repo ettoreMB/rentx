@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import {resolve} from 'path';
-import { v4 as uuidV4} from 'uuid'
+import { resolve } from 'path';
+import { v4 as uuidV4 } from 'uuid'
 import { AppError } from "@shared/errors/AppErrors";
 
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
@@ -13,22 +13,22 @@ import { IMailProvider } from "@shared/container/providers/MailProvider/IMailPro
 class SendForgotPasswordUseCase {
   constructor(
     @inject("UsersRepository")
-    private  usersRepository: IUsersRepository,
+    private usersRepository: IUsersRepository,
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository,
     @inject("DayjSDateProvider")
     private dateProvider: IDateProvider,
-    @inject("EtherealMailProvider")
+    @inject("MailProvider")
     private mailProvider: IMailProvider,
 
-  ){}
+  ) { }
 
-  async execute(email: string):Promise<void>{
+  async execute(email: string): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
 
-    const templatePath =  resolve(__dirname, "..", "..", "views", "emails", "forgotPassword.hbs")
+    const templatePath = resolve(__dirname, "..", "..", "views", "emails", "forgotPassword.hbs")
 
-    if(!user) {
+    if (!user) {
       throw new AppError("User not Found!");
     }
 
@@ -59,4 +59,4 @@ class SendForgotPasswordUseCase {
   }
 }
 
-export {SendForgotPasswordUseCase}
+export { SendForgotPasswordUseCase }

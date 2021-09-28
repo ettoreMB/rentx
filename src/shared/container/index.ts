@@ -1,4 +1,4 @@
-import {container} from 'tsyringe';
+import { container } from 'tsyringe';
 
 import "@shared/container/providers"
 
@@ -22,25 +22,25 @@ import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositor
 
 //ICategoriesRepository
 container.registerSingleton<ICategoriesRepository>(
-  "CategoriesRepository", 
+  "CategoriesRepository",
   CategoriesRepository
 )
 
 //ISpecificationsRepository
 container.registerSingleton<ISpecificationRepository>(
-  "SpecificationsRepository", 
+  "SpecificationsRepository",
   SpecificationRepository
 )
 
 //IUsersRepository
 container.registerSingleton<IUsersRepository>(
-  "UsersRepository", 
+  "UsersRepository",
   UsersRepository
 )
 
 //IUsersRepository
 container.registerSingleton<IUsersTokensRepository>(
-  "UsersTokensRepository", 
+  "UsersTokensRepository",
   UsersTokensRepository
 )
 

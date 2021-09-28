@@ -6,10 +6,10 @@ import { IStorageProvider } from "./IStorageProvider";
 
 const diskStorage = {
   local: LocalStorageProvider,
-  s3: S3StorageProvider
+  S3: S3StorageProvider
 }
 
 container.registerSingleton<IStorageProvider>(
   "StorageProvider",
-  diskStorage[process.env.DISK]
+  diskStorage[process.env.disk]
 );
