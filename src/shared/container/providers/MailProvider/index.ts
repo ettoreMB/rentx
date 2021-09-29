@@ -2,7 +2,7 @@ import { container } from "tsyringe";
 
 import { IMailProvider } from "./IMailProvider";
 import { EtherealMailProvider } from "./Implementations/EtherealMailProvider";
-import { SESmailProvider } from "./Implementations/SesMailProvider";
+import { SESmailProvider } from "./Implementations/SESMailProvider";
 
 
 const mailProvider = {

@@ -1,9 +1,9 @@
-import { v4 as uuidV4} from 'uuid';
-import { Expose } from 'class-transformer'
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Expose } from 'class-transformer';
+import { v4 as uuidV4 } from 'uuid';
 
- @Entity("users")
-class User  {
+@Entity("users")
+class User {
 
   @PrimaryColumn()
   id?: string;
@@ -29,10 +29,10 @@ class User  {
   @CreateDateColumn()
   created_at: Date;
 
-  @Expose({name: "avatar_url"})
+  @Expose({ name: "avatar_url" })
   avatar_url(): string {
-    switch(process.env.DISK) {
-      case "local": 
+    switch (process.env.DISK) {
+      case "local":
         return `${process.env.APP_API_URL}/avatar/${this.avatar}`;
       case "S3":
         return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
@@ -42,8 +42,8 @@ class User  {
   }
 
   constructor() {
-    if(!this.id)
-    this.id= uuidV4();
+    if (!this.id)
+      this.id = uuidV4();
   }
 }
 
