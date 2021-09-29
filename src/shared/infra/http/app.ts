@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-
+import cors from 'cors'
 import 'express-async-errors';
 import 'reflect-metadata';
 import 'dotenv/config';
@@ -25,7 +25,7 @@ app.use('/cars', express.static(`${upload.tmpFolder}/cars`));
 
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
+app.use(cors())
 app.use(router);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
